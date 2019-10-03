@@ -7,7 +7,7 @@ class Ship:
         self.screen = screen
 
         # Loading ship img and create rectangle
-        self.image = pygame.image.load('img//ship.bmp')
+        self.image = pygame.image.load('img//Ship_png.png')
         self.rect = self.image.get_rect()
         self.screen_rect = screen.get_rect()
 
