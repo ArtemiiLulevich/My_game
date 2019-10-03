@@ -21,6 +21,7 @@ class Ship:
         self.moving_left = False
 
     def update(self):
+        """Updating shipment coordinates"""
         if self.moving_right and self.rect.right < self.screen_rect.right:
             self.center += self.ai_settings.ship_speed_factor
         elif self.moving_left and self.rect.left > 0:
