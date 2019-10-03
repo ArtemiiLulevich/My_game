@@ -6,3 +6,4 @@
 **.json
 
 **/__pycached__/*
+**/__pycache__/*
