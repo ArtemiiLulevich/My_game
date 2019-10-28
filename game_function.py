@@ -6,7 +6,7 @@ from bullet import Bullet
 from alien import Alien
 
 
-def check_keydown_events(event, ai_settings, screen, ship, bullets):
+def check_keydown_events(event, ai_settings, screen, stats, play_button, ship, bullets):
     """Check KEYDOWN event"""
     if event.key == pygame.K_RIGHT:
         ship.moving_right = True
@@ -15,8 +15,18 @@ def check_keydown_events(event, ai_settings, screen, ship, bullets):
     elif event.key == pygame.K_SPACE:
         # Creating a new bullet and adding it top bullets group.
         fire_bullet(ai_settings, screen, ship, bullets)
+        # print("Fire")
     elif event.key == pygame.K_q:
         sys.exit()
+    elif event.key == pygame.K_F1:
+        # mouse_x, mouse_y = pygame.mouse.get_pos()
+        check_play_button(stats)
+        # print("x {}, y {}".format(mouse_x, mouse_y))
+
+
+def check_play_button(stats):
+    # if play_button.rect.collidepoint(mouse_x, mouse_y):
+    stats.game_active = True
 
 
 def check_keyup_events(event, ship):
@@ -27,18 +37,18 @@ def check_keyup_events(event, ship):
         ship.moving_left = False
 
 
-def check_events(ai_settings, screen, ship, bullets):
+def check_events(ai_settings, screen, stats, play_button, ship, bullets):
     """Check mouse and keypad events"""
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             sys.exit()
         elif event.type == pygame.KEYDOWN:
-            check_keydown_events(event, ai_settings, screen, ship, bullets)
+            check_keydown_events(event, ai_settings, screen, stats, play_button, ship, bullets)
         elif event.type == pygame.KEYUP:
             check_keyup_events(event, ship)
 
 
-def update_screen(ai_settings, screen, ship, aliens, bullets):
+def update_screen(ai_settings, screen, stats, ship, aliens, bullets, button):
     """Refreshes the image on the screen and displays a new screen."""
     screen.fill(ai_settings.bg_color)
 
@@ -47,6 +57,8 @@ def update_screen(ai_settings, screen, ship, aliens, bullets):
 
     ship.blitship()
     aliens.draw(screen)
+    if not stats.game_active:
+        button.draw_button()
     # Displays the last screen drawn.
     pygame.display.flip()
 
@@ -149,6 +161,6 @@ def update_aliens(ai_settings, screen, stats, ship, aliens, bullets):
     check_fleet_edges(ai_settings, aliens)
     aliens.update()
     if pygame.sprite.spritecollideany(ship, aliens):
-        print("Ship hit!!!")
+        # print("Ship hit!!!")
         ship_hit(ai_settings, stats, screen, ship, aliens, bullets)
     check_aliens_bottom(ai_settings, stats, screen, ship, aliens, bullets)
