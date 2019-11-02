@@ -7,7 +7,7 @@ class Settings:
         self.bg_color = (230, 230, 250)
 
         self.ship_speed_factor = 0.75
-        self.ship_limit = 0
+        self.ship_limit = 3
 
         # bullet parameters
         self.bullet_speed_factor = 0.75
