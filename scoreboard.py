@@ -18,7 +18,7 @@ class Scoreboard:
     def prep_score(self):
         rounded_score = int(round(self.stats.score, -1))
         score_str = '{:,}'.format(rounded_score)
-        score_str = str(self.stats.score)
+        # score_str = str(self.stats.score)
         self.score_image = self.font.render(score_str, True, self.text_color, self.ai_settings.bg_color)
 
         self.score_rect = self.score_image.get_rect()
@@ -44,3 +44,4 @@ class Scoreboard:
     def show_score(self):
         self.screen.blit(self.score_image, self.score_rect)
         self.screen.blit(self.high_score_image, self.high_score_rect)
+        self.screen.blit(self.level_image, self.level_rect)
